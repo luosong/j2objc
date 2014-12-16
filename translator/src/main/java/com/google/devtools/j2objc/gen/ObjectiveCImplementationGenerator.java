@@ -422,8 +422,12 @@ public class ObjectiveCImplementationGenerator extends ObjectiveCSourceFileGener
     printf("\n@implementation %s\n", typeName);
     printInitializeMethod(node);
     if (needsReflection) {
+      printTypeAnnotationsMethod(node);
+      printMethodAnnotationMethods(TreeUtil.getMethodDeclarations(node));
+      printFieldAnnotationMethods(node);
       printMetadata(node);
     }
+
     println("\n@end\n");
     printFunctions(node.getBodyDeclarations());
   }
